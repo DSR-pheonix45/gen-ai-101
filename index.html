@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random AI Fact Generator</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            text-align: center;
+            z-index: 1; /* Ensure container appears above video */
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        #fact {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background-color: #00ffff;
+            color: #24243e;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00bfff;
+        }
+
+        .glitch {
+            animation: glitch 0.5s linear infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% {
+                transform: translate(2px, 0) skew(0deg);
+            }
+            4%, 60% {
+                transform: translate(-2px, 0) skew(0deg);
+            }
+            62% {
+                transform: translate(0, 0) skew(5deg);
+            }
+        }
+
+        .glitch:before,
+        .glitch:after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            color: #00ffff;
+        }
+
+        .glitch:before {
+            left: -2px;
+            text-shadow: -3px 0 red;
+        }
+
+        .glitch:after {
+            left: 2px;
+            text-shadow: -3px 0 blue;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0; /* Ensure video is behind content */
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="background-video">
+        <source src="88117-602317833_small.mp4" type="video/mp4"> 
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <h1 class="glitch">AI Facts</h1>
+        <p id="fact"></p>
+        <button onclick="newFact()">Generate Fact</button>
+    </div>
+
+    <script>
+        const facts = [
+            "The concept of AI dates back to ancient Greece, with myths about mechanical men.",
+            "The Turing Test is a benchmark for determining if a machine can exhibit human-like intelligence.",
+            "AI powers recommendation systems on Netflix, Spotify, and Amazon.",
+            "Self-driving cars rely heavily on AI algorithms for navigation.",
+            "AI is used in healthcare for disease diagnosis and drug discovery.",
+            "Natural Language Processing (NLP) enables machines to understand human language.",
+            "AI can create art, music, and literature.",
+            "Machine learning allows systems to learn from data without explicit programming.",
+            "Deep learning uses artificial neural networks to extract complex patterns from data.",
+            "AI is being used to address global challenges like climate change and poverty.",
+            "AI is expected to impact the job market, automating some tasks and creating new ones.",
+            "Ethical considerations surrounding AI include bias, privacy, and human autonomy.",
+            "AI is used in cybersecurity to detect and prevent threats.",
+            "AI-powered robots are used in manufacturing and logistics for efficiency.",
+            "AI is transforming finance through fraud detection and algorithmic trading.",
+            "AI personalizes learning experiences and automates tasks in education.",
+            "AI analyzes large datasets to identify trends and insights for decision-making.",
+            "AI is constantly evolving, with new breakthroughs emerging regularly.",
+            "The future of AI holds immense potential for innovation in various fields.",
+            "Understanding AI is crucial for navigating the 21st-century technological landscape."
+        ];
+
+        let currentFact = "";
+
+        function newFact() {
+            // Choose a random fact that's different from the current one
+            let newFactIndex;
+            do {
+                newFactIndex = Math.floor(Math.random() * facts.length);
+            } while (newFactIndex === currentFact);
+
+            currentFact = newFactIndex;
+            document.getElementById("fact").innerText = facts[currentFact];
+        }
+
+        // Display a random fact on page load
+        newFact(); 
+    </script>
+</body>
+</html>
+
